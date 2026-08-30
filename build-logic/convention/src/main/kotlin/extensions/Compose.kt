@@ -17,6 +17,7 @@ fun Project.configureAndroidCompose(extension: CommonExtension) {
         "implementation"(libs.findLibrary("androidx-activity-compose").get())
         "implementation"(libs.findLibrary("androidx-compose-material3").get())
         "implementation"(libs.findLibrary("androidx-hilt-navigation-compose").get())
+        "implementation"(libs.findLibrary("androidx-hilt-lifecycle-viewmodel-compose").get())
         "implementation"(libs.findLibrary("androidx-compose-ui-tooling-preview").get())
         "testImplementation"(libs.findLibrary("junit").get())
         "androidTestImplementation"(libs.findLibrary("androidx-junit").get())

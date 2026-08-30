@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="home_rows_placeholder">Please enter number of rows</string>
+    <string name="home_columns_placeholder">Please enter number of columns</string>
+
+</resources>
