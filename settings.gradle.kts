@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -22,6 +23,15 @@ dependencyResolutionManagement {
     }
 }
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 rootProject.name = "editable-table"
 include(":app")
- 
+include(":data:home")
+
+include(":domain:home")
+
+include(":ui:home")
+
+include(":core:data-store")
+include(":core:database")
