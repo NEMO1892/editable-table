@@ -27,12 +27,16 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "editable-table"
 include(":app")
+
 include(":data:home")
 
 include(":domain:home")
 
-include(":ui:home")
-
 include(":core:data-store")
 include(":core:database")
 include(":core:design-system")
+
+include(":ui:home:api")
+include(":ui:home:impl")
+include(":ui:table:api")
+include(":ui:table:impl")
