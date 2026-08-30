@@ -35,3 +35,4 @@ include(":ui:home")
 
 include(":core:data-store")
 include(":core:database")
+include(":core:design-system")

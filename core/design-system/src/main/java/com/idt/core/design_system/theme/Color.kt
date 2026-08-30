@@ -1,4 +1,4 @@
-package com.idt.editable_table.ui.theme
+package com.idt.core.design_system.theme
 
 import androidx.compose.ui.graphics.Color
 
