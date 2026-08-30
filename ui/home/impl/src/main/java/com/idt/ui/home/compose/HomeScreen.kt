@@ -9,6 +9,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,13 +22,19 @@ import com.idt.core.design_system.theme.EditabletableTheme
 import com.idt.ui.home.HomeEvent
 import com.idt.ui.home.HomeState
 import com.idt.ui.home.HomeViewModel
+import com.idt.ui.table.api.TableKey
 
 @Composable
 fun HomeScreen(
+    onNavigateToTable: (TableKey) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    LaunchedEffect(viewModel, onNavigateToTable) {
+        viewModel.navigateToTable.collect { tableKey -> onNavigateToTable(tableKey) }
+    }
 
     HomeScreenContent(
         state = state,

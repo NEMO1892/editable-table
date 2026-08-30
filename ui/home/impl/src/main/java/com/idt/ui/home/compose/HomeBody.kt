@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import com.idt.core.design_system.theme.EditabletableTheme
-import com.idt.ui.home.R
+import com.idt.ui.home.impl.R
 
 @Composable
 internal fun HomeBody(

@@ -48,6 +48,10 @@ gradlePlugin {
             id = libs.plugins.editable.table.hilt.get().pluginId
             implementationClass = "HiltConventionPlugin"
         }
+        register("androidNavigation") {
+            id = libs.plugins.editable.table.android.navigation.get().pluginId
+            implementationClass = "AndroidNavigationConventionPlugin"
+        }
         register("androidRoom") {
             id = libs.plugins.editable.table.android.room.get().pluginId
             implementationClass = "AndroidRoomConventionPlugin"
