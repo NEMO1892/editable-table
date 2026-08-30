@@ -1,11 +1,13 @@
 package com.idt.ui.home.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -42,6 +44,7 @@ private fun HomeScreenContent(
 ) {
     Box(
         modifier = modifier
+            .background(MaterialTheme.colorScheme.background)
             .imePadding()
             .verticalScroll(rememberScrollState()),
         contentAlignment = Alignment.Center
@@ -49,12 +52,15 @@ private fun HomeScreenContent(
         HomeBody(
             numberOfRows = state.numberOfRows,
             numberOfColumns = state.numberOfColumns,
+            errorTextNumberOfRows = state.errorTextNumberOfRows,
+            errorTextNumberOfColumns = state.errorTextNumberOfColumns,
             onNumberOfRowsChanged = { numberOfRows ->
                 onUserEvent(HomeEvent.OnNumberOfRowsChanged(numberOfRows))
             },
             onNumberOfColumnsChanged = { numberOfColumns ->
                 onUserEvent(HomeEvent.OnNumberOfColumnsChanged(numberOfColumns))
             },
+            onNextClicked = { onUserEvent(HomeEvent.OnNextClicked) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)

@@ -1,8 +1,11 @@
 package com.idt.ui.home.compose
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,7 +26,10 @@ internal fun HomeBody(
     numberOfColumns: String,
     onNumberOfRowsChanged: (String) -> Unit,
     onNumberOfColumnsChanged: (String) -> Unit,
-    modifier: Modifier = Modifier
+    onNextClicked: () -> Unit,
+    modifier: Modifier = Modifier,
+    @StringRes errorTextNumberOfRows: Int? = null,
+    @StringRes errorTextNumberOfColumns: Int? = null
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -34,7 +40,12 @@ internal fun HomeBody(
             value = numberOfRows,
             onValueChange = { onNumberOfRowsChanged(it) },
             placeholder = { Text(stringResource(R.string.home_rows_placeholder)) },
+            label = { Text(stringResource(R.string.home_rows_label)) },
             singleLine = true,
+            isError = errorTextNumberOfRows != null,
+            supportingText = errorTextNumberOfRows?.let { errorText ->
+                { Text(stringResource(errorText)) }
+            },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Next
@@ -45,12 +56,22 @@ internal fun HomeBody(
             value = numberOfColumns,
             onValueChange = { onNumberOfColumnsChanged(it) },
             placeholder = { Text(stringResource(R.string.home_columns_placeholder)) },
+            label = { Text(stringResource(R.string.home_columns_label)) },
             singleLine = true,
+            isError = errorTextNumberOfColumns != null,
+            supportingText = errorTextNumberOfColumns?.let { errorText ->
+                { Text(stringResource(errorText)) }
+            },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Done
-            )
+            ),
+            keyboardActions = KeyboardActions(onDone = { onNextClicked() })
         )
+
+        Button(onClick = onNextClicked) {
+            Text(stringResource(R.string.home_next))
+        }
     }
 }
 
@@ -63,7 +84,8 @@ private fun HomeBodyPreview() {
             numberOfRows = "",
             numberOfColumns = "",
             onNumberOfRowsChanged = {},
-            onNumberOfColumnsChanged = {}
+            onNumberOfColumnsChanged = {},
+            onNextClicked = {}
         )
     }
 }
