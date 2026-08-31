@@ -1,6 +1,7 @@
 package com.idt.ui.table.impl.compose
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -59,19 +60,38 @@ private fun TableScreenContent(
             items = state.rows,
             key = { _, row -> row.id },
         ) { rowIndex, tableRow ->
-            Row(
+            val editableCell = tableRow.cells.firstOrNull { cell -> cell.id == state.editableCellId }
+
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(IntrinsicSize.Min)
             ) {
-                tableRow.cells.forEachIndexed { columnIndex, cell ->
-                    TableCell(
-                        text = cell.text,
-                        drawEndBorder = columnIndex == tableRow.cells.lastIndex,
-                        drawBottomBorder = rowIndex == state.rows.lastIndex,
-                        modifier = Modifier
-                            .weight(1f)
-                            .fillMaxHeight(),
+                Row(modifier = Modifier.fillMaxSize()) {
+                    tableRow.cells.forEachIndexed { columnIndex, cell ->
+                        TableCell(
+                            text = cell.text,
+                            drawEndBorder = columnIndex == tableRow.cells.lastIndex,
+                            drawBottomBorder = rowIndex == state.rows.lastIndex,
+                            isGreen = cell.isGreen,
+                            onCellClicked = { onUserEvent(TableEvent.OnCellClicked(cell.id)) },
+                            onCellDoubleClicked = { onUserEvent(TableEvent.OnCellDoubleClicked(cell.id)) },
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxHeight(),
+                        )
+                    }
+                }
+
+                if (editableCell != null) {
+                    TableCellEditor(
+                        cellId = editableCell.id,
+                        text = editableCell.text,
+                        onTextChanged = { text ->
+                            onUserEvent(TableEvent.OnCellTextChanged(editableCell.id, text))
+                        },
+                        onEditingFinished = { onUserEvent(TableEvent.OnCellEditingFinished) },
+                        modifier = Modifier.matchParentSize(),
                     )
                 }
             }

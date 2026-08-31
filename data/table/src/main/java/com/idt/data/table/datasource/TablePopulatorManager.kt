@@ -20,7 +20,8 @@ internal class TablePopulatorManager @Inject constructor() {
                 domainCells = List(numberOfColumns.columns) {
                     DomainCell(
                         id = nextCellId++,
-                        text = generateRandomText()
+                        text = generateRandomText(),
+                        isGreen = false
                     )
                 }
             )

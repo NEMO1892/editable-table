@@ -26,6 +26,10 @@ class TableViewModel @Inject constructor(
     internal fun handleUserEvent(event: TableEvent) {
         when (event) {
             is TableEvent.OnGetTable -> handleOnGetTable(event.numberOfRows, event.numberOfColumns)
+            is TableEvent.OnCellClicked -> handleOnCellClicked(event.id)
+            is TableEvent.OnCellDoubleClicked -> handleOnCellDoubleClicked(event.id)
+            is TableEvent.OnCellTextChanged -> handleOnCellTextChanged(event.text, event.id)
+            is TableEvent.OnCellEditingFinished -> handleOnCellEditingFinished()
         }
     }
 
@@ -34,7 +38,50 @@ class TableViewModel @Inject constructor(
             numberOfRows = NumberOfRows(numberOfRows),
             numberOfColumns = NumberOfColumns(numberOfColumns)
         )
+        _state.update { state ->
+            state.copy(
+                rows = rows.map(tableRowMapper::invoke),
+                editableCellId = null
+            )
+        }
+    }
 
-        _state.update { state -> state.copy(rows = rows.map(tableRowMapper::invoke)) }
+    private fun handleOnCellDoubleClicked(id: Int) {
+        _state.update { state -> state.copy(editableCellId = id) }
+    }
+
+    private fun handleOnCellEditingFinished() {
+        _state.update { state -> state.copy(editableCellId = null) }
+    }
+
+    private fun handleOnCellClicked(id: Int) {
+        _state.update { state ->
+            state.copy(
+                editableCellId = null,
+                rows = state.rows.map { row ->
+                    if (row.cells.none { cell -> cell.id == id }) return@map row
+                    row.copy(
+                        cells = row.cells.map { cell ->
+                            if (cell.id == id) cell.copy(isGreen = !cell.isGreen) else cell
+                        }
+                    )
+                }
+            )
+        }
+    }
+
+    private fun handleOnCellTextChanged(cellText: String, id: Int) {
+        _state.update { state ->
+            state.copy(
+                rows = state.rows.map { row ->
+                    if (row.cells.none { cell -> cell.id == id }) return@map row
+                    row.copy(
+                        cells = row.cells.map { cell ->
+                            if (cell.id == id) cell.copy(text = cellText) else cell
+                        }
+                    )
+                }
+            )
+        }
     }
 }

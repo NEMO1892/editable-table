@@ -6,4 +6,5 @@ import androidx.compose.runtime.Immutable
 data class Cell(
     val id: Int,
     val text: String,
+    val isGreen: Boolean
 )

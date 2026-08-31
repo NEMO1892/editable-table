@@ -17,6 +17,7 @@ class TableRowMapper @Inject constructor() {
 
     private fun DomainCell.mapToUI(): Cell = Cell(
         id = id,
-        text = text
+        text = text,
+        isGreen = isGreen
     )
 }

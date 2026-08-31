@@ -5,4 +5,5 @@ import androidx.compose.runtime.Immutable
 @Immutable
 data class TableState(
     val rows: List<TableRow> = emptyList(),
+    val editableCellId: Int? = null,
 )
