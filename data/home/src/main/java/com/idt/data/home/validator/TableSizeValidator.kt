@@ -26,7 +26,7 @@ internal class TableSizeValidator @Inject constructor() {
 
     private companion object {
 
-        val ALLOWED_ROWS = 1..6
-        val ALLOWED_COLUMNS = 1..1000
+        val ALLOWED_ROWS = 1..1000
+        val ALLOWED_COLUMNS = 1..6
     }
 }

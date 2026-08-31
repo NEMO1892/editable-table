@@ -1,4 +1,4 @@
-package com.idt.ui.home
+package com.idt.ui.home.model
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable

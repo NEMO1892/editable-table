@@ -5,8 +5,8 @@
     <string name="home_columns_placeholder">Please enter number of columns</string>
     <string name="home_rows_label">Rows</string>
     <string name="home_columns_label">Columns</string>
-    <string name="home_rows_error">Number of rows should at least 1 and at most 6</string>
-    <string name="home_columns_error">Number of columns should at least 1 and at most 1000</string>
+    <string name="home_rows_error">Number of rows should at least 1 and at most 1000</string>
+    <string name="home_columns_error">Number of columns should at least 1 and at most 6</string>
     <string name="home_next">Next</string>
 
 </resources>
