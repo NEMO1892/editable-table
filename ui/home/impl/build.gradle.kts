@@ -10,7 +10,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.domain.home)
+    implementation(projects.domain.table)
 
     implementation(projects.ui.home.api)
     implementation(projects.ui.table.api)

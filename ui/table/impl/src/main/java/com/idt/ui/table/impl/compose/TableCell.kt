@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
@@ -29,6 +30,7 @@ internal fun TableCell(
         Text(
             text = text,
             maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
             modifier = Modifier.padding(4.dp),
         )
     }

@@ -28,9 +28,9 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "editable-table"
 include(":app")
 
-include(":data:home")
+include(":data:table")
 
-include(":domain:home")
+include(":domain:table")
 
 include(":core:data-store")
 include(":core:database")

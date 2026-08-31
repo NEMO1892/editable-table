@@ -1,10 +1,10 @@
 package com.idt.ui.home
 
 import androidx.lifecycle.ViewModel
-import com.idt.domain.home.model.NumberOfColumns
-import com.idt.domain.home.model.NumberOfRows
-import com.idt.domain.home.model.ValidationResult
-import com.idt.domain.home.use_case.ValidateTableSizeUseCase
+import com.idt.domain.table.model.NumberOfColumns
+import com.idt.domain.table.model.NumberOfRows
+import com.idt.domain.table.model.ValidationResult
+import com.idt.domain.table.use_case.ValidateTableSizeUseCase
 import com.idt.ui.home.impl.R
 import com.idt.ui.home.model.HomeEvent
 import com.idt.ui.home.model.HomeState

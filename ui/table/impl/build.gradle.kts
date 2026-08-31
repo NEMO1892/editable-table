@@ -12,5 +12,7 @@ android {
 dependencies {
     implementation(projects.ui.table.api)
 
+    implementation(projects.domain.table)
+
     implementation(projects.core.designSystem)
 }
