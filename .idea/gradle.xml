@@ -29,11 +29,16 @@
             <option value="$PROJECT_DIR$/core/database" />
             <option value="$PROJECT_DIR$/core/design-system" />
             <option value="$PROJECT_DIR$/data" />
-            <option value="$PROJECT_DIR$/data/home" />
+            <option value="$PROJECT_DIR$/data/table" />
             <option value="$PROJECT_DIR$/domain" />
-            <option value="$PROJECT_DIR$/domain/home" />
+            <option value="$PROJECT_DIR$/domain/table" />
             <option value="$PROJECT_DIR$/ui" />
             <option value="$PROJECT_DIR$/ui/home" />
+            <option value="$PROJECT_DIR$/ui/home/api" />
+            <option value="$PROJECT_DIR$/ui/home/impl" />
+            <option value="$PROJECT_DIR$/ui/table" />
+            <option value="$PROJECT_DIR$/ui/table/api" />
+            <option value="$PROJECT_DIR$/ui/table/impl" />
           </set>
         </option>
       </GradleProjectSettings>

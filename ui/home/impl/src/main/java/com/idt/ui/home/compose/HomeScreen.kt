@@ -2,6 +2,7 @@ package com.idt.ui.home.compose
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
@@ -19,15 +20,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.idt.core.design_system.theme.EditabletableTheme
-import com.idt.ui.home.HomeEvent
-import com.idt.ui.home.HomeState
+import com.idt.ui.home.model.HomeEvent
+import com.idt.ui.home.model.HomeState
 import com.idt.ui.home.HomeViewModel
 import com.idt.ui.table.api.TableKey
 
 @Composable
 fun HomeScreen(
     onNavigateToTable: (TableKey) -> Unit,
-    modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -39,7 +39,6 @@ fun HomeScreen(
     HomeScreenContent(
         state = state,
         onUserEvent = viewModel::handleEvent,
-        modifier = modifier
     )
 }
 
@@ -51,6 +50,7 @@ private fun HomeScreenContent(
 ) {
     Box(
         modifier = modifier
+            .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
             .imePadding()
             .verticalScroll(rememberScrollState()),
