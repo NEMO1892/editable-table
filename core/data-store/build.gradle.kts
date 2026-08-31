@@ -6,3 +6,8 @@ plugins {
 android {
     namespace = "com.idt.core.data_store"
 }
+
+dependencies {
+    implementation(libs.androidx.datastore.core)
+    implementation(libs.androidx.datastore.preferences)
+}
