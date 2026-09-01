@@ -14,8 +14,12 @@ internal interface TableDataSource {
 
     suspend fun updateNumberOfColumns(numberOfColumns: NumberOfColumns?)
 
-    fun getTableInfo(
+    suspend fun getTableInfo(
         numberOfRows: NumberOfRows,
         numberOfColumns: NumberOfColumns
     ): List<TableRow>
+
+    suspend fun updateCellColor(rowIndex: Int, columnIndex: Int, isGreen: Boolean)
+
+    suspend fun updateCellText(rowIndex: Int, columnIndex: Int, text: String)
 }

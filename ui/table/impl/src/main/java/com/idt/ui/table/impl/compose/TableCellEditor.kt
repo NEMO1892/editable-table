@@ -23,10 +23,11 @@ import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import com.idt.ui.table.impl.model.CellId
 
 @Composable
 internal fun TableCellEditor(
-    cellId: Int,
+    cellId: CellId,
     text: String,
     onTextChanged: (String) -> Unit,
     onEditingFinished: () -> Unit,
