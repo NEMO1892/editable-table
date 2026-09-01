@@ -10,7 +10,7 @@ class GetTableInfoUseCase @Inject constructor(
     private val tableRepository: TableRepository
 ) {
 
-    operator fun invoke(
+    suspend operator fun invoke(
         numberOfRows: NumberOfRows,
         numberOfColumns: NumberOfColumns
     ): List<TableRow> = tableRepository.getTableInfo(numberOfRows, numberOfColumns)

@@ -1,7 +1,8 @@
 package com.idt.domain.table.repository
 
 data class DomainCell(
-    val id: Int,
+    val rowIndex: Int,
+    val columnIndex: Int,
     val text: String,
     val isGreen: Boolean
 )

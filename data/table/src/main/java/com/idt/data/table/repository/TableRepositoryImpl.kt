@@ -27,8 +27,22 @@ internal class TableRepositoryImpl @Inject constructor(
         numberOfColumns: NumberOfColumns
     ): ValidationResult = tableSizeValidator.validate(numberOfRows, numberOfColumns)
 
-    override fun getTableInfo(
+    override suspend fun getTableInfo(
         numberOfRows: NumberOfRows,
         numberOfColumns: NumberOfColumns
     ): List<TableRow> = tableDataSource.getTableInfo(numberOfRows, numberOfColumns)
+
+    override suspend fun updateCellColor(rowIndex: Int, columnIndex: Int, isGreen: Boolean) =
+        tableDataSource.updateCellColor(
+            rowIndex,
+            columnIndex,
+            isGreen
+        )
+
+    override suspend fun updateCellText(rowIndex: Int, columnIndex: Int, text: String) =
+        tableDataSource.updateCellText(
+            rowIndex,
+            columnIndex,
+            text
+        )
 }

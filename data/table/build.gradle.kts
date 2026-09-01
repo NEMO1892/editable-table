@@ -10,5 +10,6 @@ android {
 dependencies {
     implementation(projects.domain.table)
 
+    implementation(projects.core.database)
     implementation(projects.core.dataStore)
 }

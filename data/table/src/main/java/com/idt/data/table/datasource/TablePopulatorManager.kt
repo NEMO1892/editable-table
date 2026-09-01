@@ -11,21 +11,18 @@ internal class TablePopulatorManager @Inject constructor() {
     fun populateTableWithRandomData(
         numberOfRows: NumberOfRows,
         numberOfColumns: NumberOfColumns
-    ): List<TableRow> {
-        var nextRowId = 0
-        var nextCellId = 0
-        return List(numberOfRows.rows) {
-            TableRow(
-                id = nextRowId++,
-                domainCells = List(numberOfColumns.columns) {
-                    DomainCell(
-                        id = nextCellId++,
-                        text = generateRandomText(),
-                        isGreen = false
-                    )
-                }
-            )
-        }
+    ): List<TableRow> = List(numberOfRows.rows) { rowIndex ->
+        TableRow(
+            id = rowIndex,
+            domainCells = List(numberOfColumns.columns) { columnIndex ->
+                DomainCell(
+                    rowIndex = rowIndex,
+                    columnIndex = columnIndex,
+                    text = generateRandomText(),
+                    isGreen = false
+                )
+            }
+        )
     }
 
     private fun generateRandomText(): String {
