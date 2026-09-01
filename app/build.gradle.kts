@@ -31,4 +31,5 @@ dependencies {
     implementation(projects.core.dataStore)
     implementation(projects.core.database)
     implementation(projects.core.designSystem)
+    implementation(projects.core.common)
 }

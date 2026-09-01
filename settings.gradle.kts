@@ -35,6 +35,7 @@ include(":domain:table")
 include(":core:data-store")
 include(":core:database")
 include(":core:design-system")
+include(":core:common")
 
 include(":ui:home:api")
 include(":ui:home:impl")

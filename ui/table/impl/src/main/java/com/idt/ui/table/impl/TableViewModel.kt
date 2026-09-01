@@ -44,12 +44,14 @@ class TableViewModel @Inject constructor(
 
     private fun handleOnGetTable(numberOfRows: Int, numberOfColumns: Int) {
         viewModelScope.launch {
+            _state.update { state -> state.copy(isLoading = true) }
             val rows = getTableInfoUseCase(
                 NumberOfRows(numberOfRows),
                 NumberOfColumns(numberOfColumns)
             )
             _state.update { state ->
                 state.copy(
+                    isLoading = false,
                     rows = rows.map(tableRowMapper::invoke),
                     editableCellId = null
                 )
