@@ -1,0 +1,42 @@
+package com.idt.core.data_store.di
+
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.preferencesDataStoreFile
+import com.idt.core.common.coroutines.IoDispatcher
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+internal class DataStoreModule {
+
+    @Singleton
+    @Provides
+    fun providePasscodeDataStore(
+        @ApplicationContext context: Context,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher,
+    ): DataStore<Preferences> = PreferenceDataStoreFactory.create(
+        corruptionHandler = ReplaceFileCorruptionHandler(
+            produceNewData = { emptyPreferences() }
+        ),
+        scope = CoroutineScope(ioDispatcher + SupervisorJob()),
+        produceFile = { context.preferencesDataStoreFile(DATA_STORE_NAME) }
+    )
+
+    private companion object {
+
+        const val DATA_STORE_NAME = "TABLE_SIZE_DATA_STORE_PREFERENCES_NAME"
+    }
+}

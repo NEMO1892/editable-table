@@ -1,0 +1,88 @@
+package com.idt.ui.home.compose
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.idt.core.design_system.theme.EditabletableTheme
+import com.idt.ui.home.model.HomeEvent
+import com.idt.ui.home.model.HomeState
+import com.idt.ui.home.HomeViewModel
+import com.idt.ui.table.api.TableKey
+
+@Composable
+fun HomeScreen(
+    onNavigateToTable: (TableKey) -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
+    LaunchedEffect(viewModel, onNavigateToTable) {
+        viewModel.navigateToTable.collect { tableKey -> onNavigateToTable(tableKey) }
+    }
+
+    HomeScreenContent(
+        state = state,
+        onUserEvent = viewModel::handleEvent,
+    )
+}
+
+@Composable
+private fun HomeScreenContent(
+    state: HomeState,
+    onUserEvent: (HomeEvent) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .imePadding()
+            .verticalScroll(rememberScrollState()),
+        contentAlignment = Alignment.Center
+    ) {
+        HomeBody(
+            numberOfRows = state.numberOfRows,
+            numberOfColumns = state.numberOfColumns,
+            errorTextNumberOfRows = state.errorTextNumberOfRows,
+            errorTextNumberOfColumns = state.errorTextNumberOfColumns,
+            onNumberOfRowsChanged = { numberOfRows ->
+                onUserEvent(HomeEvent.OnNumberOfRowsChanged(numberOfRows))
+            },
+            onNumberOfColumnsChanged = { numberOfColumns ->
+                onUserEvent(HomeEvent.OnNumberOfColumnsChanged(numberOfColumns))
+            },
+            onNextClicked = { onUserEvent(HomeEvent.OnNextClicked) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        )
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+@PreviewScreenSizes
+private fun HomeScreenContentPreview() {
+    EditabletableTheme {
+        HomeScreenContent(
+            state = HomeState(),
+            onUserEvent = {  }
+        )
+    }
+}
