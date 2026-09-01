@@ -12,4 +12,5 @@ dependencies {
 
     implementation(projects.core.database)
     implementation(projects.core.dataStore)
+    implementation(projects.core.common)
 }

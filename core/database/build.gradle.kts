@@ -8,3 +8,7 @@ plugins {
 android {
     namespace = "com.idt.core.database"
 }
+
+dependencies {
+    implementation(projects.core.common)
+}

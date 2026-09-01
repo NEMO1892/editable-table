@@ -1,5 +1,10 @@
 package com.idt.editable_table
 
+import androidx.compose.animation.ContentTransform
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
@@ -40,9 +45,35 @@ internal fun NavigationRoot(
             rememberSaveableStateHolderNavEntryDecorator(),
             rememberViewModelStoreNavEntryDecorator(),
         ),
+        transitionSpec = { ForwardTransition },
+        popTransitionSpec = { BackwardTransition },
+        predictivePopTransitionSpec = { BackwardTransition },
         entryProvider = entryProvider {
             entryBuilders.forEach { builder -> this.builder(backStack) }
         },
         modifier = modifier
     )
 }
+
+private const val TRANSITION_DURATION_MILLIS = 300
+
+private fun slideTransition(
+    initialOffsetX: (fullWidth: Int) -> Int,
+    targetOffsetX: (fullWidth: Int) -> Int
+): ContentTransform = slideInHorizontally(
+    animationSpec = tween(TRANSITION_DURATION_MILLIS),
+    initialOffsetX = initialOffsetX
+) togetherWith slideOutHorizontally(
+    animationSpec = tween(TRANSITION_DURATION_MILLIS),
+    targetOffsetX = targetOffsetX
+)
+
+private val ForwardTransition = slideTransition(
+    initialOffsetX = { fullWidth -> fullWidth },
+    targetOffsetX = { fullWidth -> -fullWidth }
+)
+
+private val BackwardTransition = slideTransition(
+    initialOffsetX = { fullWidth -> -fullWidth },
+    targetOffsetX = { fullWidth -> fullWidth }
+)
